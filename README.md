@@ -82,3 +82,11 @@ void loop ( ) {
 
 delay(100);  
  }
+ 
+ 
+ 
+ Integrantes:
+ 
+ Cesár Alexander Marín Zurita
+ 
+ Jesús Armando Gardida del Río
