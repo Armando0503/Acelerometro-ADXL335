@@ -3,7 +3,9 @@ Este proyecto consiste en tomar medidas de un acelerometro analogico en la plata
 
 A continuación se mostrará el código
 
+
 //Pines analogicos de lectura
+
 
  const int xPin = 0;    
  
@@ -13,6 +15,7 @@ A continuación se mostrará el código
  
 
 // Valores mínimos y máximos del acelerometro en reposo
+
 
  int minVal = 265;     
  
