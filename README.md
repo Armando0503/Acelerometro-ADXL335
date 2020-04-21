@@ -31,7 +31,9 @@ A continuación se mostrará el código
  double z;
 
 void setup ( ) {
+
  Serial.begin(9600);
+ 
  }
 
 void loop ( ) {
