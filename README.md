@@ -29,16 +29,23 @@ void loop ( ) {
  int zRead = analogRead(zPin);
 
 // mapea los valores leidos a un rango  -90 a 90 grados (-π  a  π )
+
  int xAng = map(xRead, minVal, maxVal, -90, 90);
+ 
  int yAng = map(yRead, minVal, maxVal, -90, 90);
+ 
  int zAng = map(zRead, minVal, maxVal, -90, 90);
 
 //Convertimos los radianes a grados
+
  x = RAD_TO_DEG * (atan2(-yAng, -zAng) + PI);
+ 
  y = RAD_TO_DEG * (atan2(-xAng, -zAng) + PI);
+ 
  z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
 
 //Imprimimos en el monitor serial los caluculos
+
  Serial.print("x: ");
  Serial.print(x);
  Serial.print(" | y: ");
