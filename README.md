@@ -4,7 +4,6 @@ Este proyecto consiste en tomar medidas de un acelerometro analogico en la plata
 A continuación se mostrará el código
 
 //Pines analogicos de lectura
-
  const int xPin = 0;    
  
  const int yPin = 1;
@@ -12,12 +11,11 @@ A continuación se mostrará el código
  const int zPin = 2;
 
 // Valores mínimos y máximos del acelerometro en reposo
-
  int minVal = 265;     
  
  int maxVal = 402;
 
-// para guardar los valores calculados
+// Para guardar los valores calculados
 
  double x;    
  
@@ -31,7 +29,7 @@ void setup ( ) {
 
 void loop ( ) {
 
-//Lee los valores analogicos del acelerometro
+//Lectura de los valores analogicos del acelerometro
 
  int xRead = analogRead(xPin);  
  
@@ -39,7 +37,7 @@ void loop ( ) {
  
  int zRead = analogRead(zPin);
 
-// mapea los valores leidos a un rango  -90 a 90 grados (-π  a  π )
+// Mapea los valores leidos a un rango de -90 a 90 grados
 
  int xAng = map(xRead, minVal, maxVal, -90, 90);
  
@@ -47,7 +45,7 @@ void loop ( ) {
  
  int zAng = map(zRead, minVal, maxVal, -90, 90);
 
-//Convertimos los radianes a grados
+//Conversión de radianes a grados
 
  x = RAD_TO_DEG * (atan2(-yAng, -zAng) + PI);
  
@@ -55,7 +53,7 @@ void loop ( ) {
  
  z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
 
-//Imprimimos en el monitor serial los caluculos
+//Imprimimos en el monitor serial
 
  Serial.print("x: ");
  
@@ -69,5 +67,5 @@ void loop ( ) {
  
  Serial.println(z);
 
-delay(100);       //Espera 1 decima de segundo
+delay(100);  
  }
