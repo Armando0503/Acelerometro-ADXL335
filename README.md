@@ -7,9 +7,13 @@ A continuación se mostrará el código
 #include <Servo.h>
 
 const int xPin = 0;   //ACELEROMETRO
+
 const int yPin = 1;
+
 const int zPin = 2;
+
 int led2 = A3;        // Pines de lectura analógica
+
 int led3 = A4;
 
 // Los valores mínimos y máximos que provienen
@@ -45,6 +49,7 @@ void setup()
 void loop()
 
 {// lee los valores analógicos del acelerómetro
+
 int xRead = analogRead (xPin);
 
 int yRead = analogRead (yPin);
