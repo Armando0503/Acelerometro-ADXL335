@@ -4,84 +4,74 @@ Este proyecto consiste en tomar medidas de un acelerometro analogico en la plata
 A continuación se mostrará el código
 
 
-//Pines analogicos de lectura
+#include <Servo.h>
 
+const int xPin = 0;     //ACELEROMETRO
+const int yPin = 1;
+const int zPin = 2;
+int led2 = A3;// Pines de lectura analógica
+int led3 = A4;
 
- const int xPin = 0;    
- 
- const int yPin = 1;
- 
- const int zPin = 2;
- 
+// Los valores mínimos y máximos que provienen
+// del acelerómetro mientras está parado
+int minVal = 265;
+int maxVal = 402;
 
-// Valores mínimos y máximos del acelerometro en reposo
+// Parte del servomotor
+Servo servo1;       //Crea un objeto servo que se llama servo1
+int angulo = 90;    // Valor inicial del servo
 
+// para mantener los valores calculados
+double x;
+double y;
+double z;
 
- int minVal = 265;     
- 
- int maxVal = 402;
- 
+void setup()
+{
+  Serial.begin(9600);
+  servo1.attach(9); //Asociamos el servo a la patilla 11 de Arduino
+}
+void loop()
+{// lee los valores analógicos del acelerómetro
+int xRead = analogRead (xPin);
+int yRead = analogRead (yPin);
+int zRead = analogRead (zPin);
 
-// Para guardar los valores calculados
+// convierte los valores de lectura a grados -90 a 90 - necesarios para atan2
 
- double x;    
- 
- double y;
- 
- double z;
+int xAng = map (xRead, minVal, maxVal, -90, 90);
+int yAng = map (yRead, minVal, maxVal, -90, 90);
+int zAng = map (zRead, minVal, maxVal, -90, 90);
 
-void setup ( ) {
+// Calcula valores de 360 ​​grados de la siguiente manera: atan2 (-yAng, -zAng)
+// atan2 genera el valor de -π a π (radianes)
 
- Serial.begin(9600);
- 
- }
+// Estamos convirtiendo los radianes a grados
 
-void loop ( ) {
+x = RAD_TO_DEG * (atan2 (-yAng, -zAng) + PI);
+y = RAD_TO_DEG * (atan2 (-xAng, -zAng) + PI);
+z = RAD_TO_DEG * (atan2 (-yAng, -xAng) + PI);
 
+// Genera los cálculos
 
-//Lectura de los valores analogicos del acelerometro
+Serial.print ("x: ");
+Serial.print (x);
+Serial.print ("y: ");
+Serial.print (y);
+Serial.print ("z: ");
+Serial.println (z);
 
- int xRead = analogRead(xPin);  
- 
- int yRead = analogRead(yPin);
- 
- int zRead = analogRead(zPin);
- 
-
-// Mapea los valores leidos a un rango de -90 a 90 grados
-
- int xAng = map(xRead, minVal, maxVal, -90, 90);
- 
- int yAng = map(yRead, minVal, maxVal, -90, 90);
- 
- int zAng = map(zRead, minVal, maxVal, -90, 90);
- 
-
-//Conversión de radianes a grados
-
- x = RAD_TO_DEG * (atan2(-yAng, -zAng) + PI);
- 
- y = RAD_TO_DEG * (atan2(-xAng, -zAng) + PI);
- 
- z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
- 
-
-//Impresión en el monitor serial
-
- Serial.print("x: ");
- 
- Serial.print(x);
- 
- Serial.print("y: ");
- 
- Serial.print(y);
- 
- Serial.print("z: ");
- 
- Serial.println(z);
-
-delay(100);  
- }
+delay (100); // ralentizar la salida en serie
+ servo1.attach(x); //Mueve el Servo a la posición definida en la variable    
+  if(x>=180)
+  { 
+    digitalWrite(led2, HIGH); //el LED se prende
+  }
+  if(x<=0)
+  { 
+    digitalWrite(led2,LOW); //el LED se apaga
+  }
+}
  
  
  
