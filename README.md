@@ -85,7 +85,7 @@ delay (100); // ralentizar la salida en serie
 
  servo1.attach(x); //Mueve el Servo a la posición definida en la variable    
  
-  if(x>=180)
+  if(x>90 && x<=180)
 
   { 
   
@@ -96,7 +96,7 @@ delay (100); // ralentizar la salida en serie
     delay (1000);
   }
   
-  if(x<=0)
+  if(x<90 && x>=0)
   
   { 
   
