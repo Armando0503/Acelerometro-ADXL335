@@ -88,14 +88,24 @@ delay (100); // ralentizar la salida en serie
   if(x>=180)
 
   { 
+  
     digitalWrite(led2, HIGH); //el LED se prende
+    
     digitalWrite(led3, HIGH); 
+    
     delay (1000);
   }
+  
   if(x<=0)
+  
   { 
+  
     digitalWrite(led2,LOW); //el LED se apaga
+    
     digitalWrite(led3,LOW); //el LED se apaga
+    
     delay(1000);
+    
   }
+  
 }
